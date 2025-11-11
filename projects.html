@@ -31,17 +31,23 @@
 		<header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
 			<div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
 				<a href="/" class="font-semibold text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Manuel Colino</a>
-				<nav class="hidden md:flex gap-6 items-center">
-					<a class="nav-link" href="/">Home</a>
-					<a class="nav-link active" href="/projects.html">Projects</a>
-					<a class="nav-link" href="/about.html">About</a>
-					<a class="nav-link" href="/contact.html">Contact</a>
-					<button id="themeToggle" class="rounded-lg px-3 py-1.5 text-sm border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-						</svg>
-					</button>
-				</nav>
+				<div class="flex items-center gap-4">
+					<nav class="hidden md:flex gap-6 items-center">
+						<a class="nav-link active" href="/projects.html">Projects</a>
+						<a class="nav-link" href="/about.html">About</a>
+						<a class="nav-link" href="/contact.html">Contact</a>
+					</nav>
+					<div class="flex items-center gap-4">
+						<button id="themeToggle" class="rounded-lg p-2 text-sm border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle dark mode">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+							</svg>
+						</button>
+						<div class="hidden md:block w-10 h-10 rounded-full overflow-hidden border-2 border-indigo-100 dark:border-indigo-900 shadow">
+							<img src="assets/img/Foto_cv_zoom.jpg" alt="Manuel Colino" class="w-full h-full object-cover">
+						</div>
+					</div>
+				</div>
 			</div>
 		</header>
 
