@@ -27,27 +27,39 @@
 			})();
 		</script>
 	</head>
-	<body class="h-full bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100">
-		<header class="border-b border-slate-200 dark:border-slate-800">
+	<body class="h-full bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+		<header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
 			<div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
-				<a href="/" class="font-semibold">Your Name</a>
+				<a href="/" class="font-semibold text-xl bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Manuel Colino</a>
 				<nav class="hidden md:flex gap-6 items-center">
+					<a class="nav-link" href="/">Home</a>
 					<a class="nav-link active" href="/projects.html">Projects</a>
 					<a class="nav-link" href="/about.html">About</a>
 					<a class="nav-link" href="/contact.html">Contact</a>
-					<button id="themeToggle" class="rounded-md px-3 py-1.5 text-sm border border-slate-300 dark:border-slate-700">Toggle theme</button>
+					<button id="themeToggle" class="rounded-lg px-3 py-1.5 text-sm border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+						</svg>
+					</button>
 				</nav>
 			</div>
 		</header>
-		<main class="mx-auto max-w-5xl px-4 py-12">
-			<h1 class="text-3xl md:text-4xl font-bold tracking-tight">Projects</h1>
-			<p class="mt-4 text-slate-600 dark:text-slate-300">
-				Selected projects. Filter and browse below.
-			</p>
-			<div class="mt-8">
-				<div id="projectFilters" class="flex flex-wrap gap-2"></div>
-				<div id="projectsGrid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-					<!-- Filled by JS -->
+
+		<main class="min-h-[calc(100vh-200px)]">
+			<div class="mx-auto max-w-5xl px-4 py-12">
+				<div class="text-center mb-12">
+					<h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent inline-block">My Projects</h1>
+					<p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+						A collection of my work and contributions in aerospace engineering and software development.
+					</p>
+				</div>
+
+				<div class="mb-8">
+					<div id="projectFilters" class="flex flex-wrap justify-center gap-2"></div>
+				</div>
+
+				<div id="projectsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+					<!-- Projects will be loaded here by JavaScript -->
 				</div>
 			</div>
 		</main>

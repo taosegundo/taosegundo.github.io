@@ -1,22 +1,75 @@
 /* Base utilities extending Tailwind defaults */
 :root {
-	--ring: 0 0 #0000;
+  --ring: 0 0 #0000;
+  --primary: 79, 70, 229;  /* indigo-600 */
+  --primary-hover: 67, 56, 202;  /* indigo-700 */
 }
 
+/* Base styles */
+body {
+  @apply bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-200;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold tracking-tight;
+}
+
+/* Buttons */
 .btn-primary {
-	@apply inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 transition;
+  @apply inline-flex items-center justify-center rounded-lg bg-indigo-600 px-5 py-2.5 text-white shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900 transition-all duration-200 transform hover:-translate-y-0.5;
 }
+
 .btn-secondary {
-	@apply inline-flex items-center justify-center rounded-md border border-slate-300 dark:border-slate-700 px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition;
+  @apply inline-flex items-center justify-center rounded-lg border border-slate-300 dark:border-slate-700 px-5 py-2.5 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all duration-200 transform hover:-translate-y-0.5;
 }
+
+/* Inputs */
 .input {
-	@apply w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-500;
+  @apply w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900/50 px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition;
 }
+
+/* Navigation */
 .nav-link {
-	@apply text-sm text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition;
+  @apply text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-indigo-600 after:transition-all after:duration-300 after:w-0 hover:after:w-full;
+  position: relative;
+  padding-bottom: 4px;
 }
+
 .nav-link.active {
-	@apply text-slate-900 dark:text-white font-medium;
+  @apply text-indigo-600 dark:text-indigo-400 font-semibold;
 }
 
+/* Cards */
+.card {
+  @apply rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm p-6 shadow-sm hover:shadow-md transition-all duration-300;
+}
 
+/* Dark mode overrides */
+.dark .card {
+  background-color: rgba(15, 23, 42, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-slate-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-600 rounded-full hover:bg-slate-400 dark:hover:bg-slate-500;
+}
