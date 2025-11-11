@@ -1,15 +1,57 @@
-/* Theme toggle and small helpers */
+/* Theme toggle, mobile menu and small helpers */
 (function () {
+	// Set current year in footer
 	const year = document.getElementById('year');
 	if (year) year.textContent = String(new Date().getFullYear());
 
-	const toggle = document.getElementById('themeToggle');
-	if (toggle) {
-		toggle.addEventListener('click', () => {
-			const root = document.documentElement;
-			const isDark = root.classList.toggle('dark');
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+	// Mobile menu toggle
+	const mobileMenuButton = document.getElementById('mobileMenuButton');
+	const mobileMenu = document.getElementById('mobileMenu');
+	
+	if (mobileMenuButton && mobileMenu) {
+		mobileMenuButton.addEventListener('click', (e) => {
+			e.stopPropagation();
+			mobileMenu.classList.toggle('hidden');
+			document.body.style.overflow = mobileMenu.classList.contains('hidden') ? '' : 'hidden';
 		});
+
+		// Close menu when clicking outside
+		document.addEventListener('click', (e) => {
+			if (!mobileMenu.classList.contains('hidden') && 
+				!mobileMenu.contains(e.target) && 
+				e.target !== mobileMenuButton && 
+				!mobileMenuButton.contains(e.target)) {
+				mobileMenu.classList.add('hidden');
+				document.body.style.overflow = '';
+			}
+		});
+
+		// Close menu when a link is clicked
+		mobileMenu.querySelectorAll('a').forEach(link => {
+			link.addEventListener('click', () => {
+				mobileMenu.classList.add('hidden');
+				document.body.style.overflow = '';
+			});
+		});
+	}
+
+	// Theme toggle function
+	const toggleTheme = () => {
+		const root = document.documentElement;
+		const isDark = root.classList.toggle('dark');
+		localStorage.setItem('theme', isDark ? 'dark' : 'light');
+	};
+
+	// Desktop theme toggle
+	const desktopToggle = document.getElementById('themeToggle');
+	if (desktopToggle) {
+		desktopToggle.addEventListener('click', toggleTheme);
+	}
+
+	// Mobile theme toggle
+	const mobileToggle = document.getElementById('mobileThemeToggle');
+	if (mobileToggle) {
+		mobileToggle.addEventListener('click', toggleTheme);
 	}
 
 	// Show resume link if exists
