@@ -61,17 +61,61 @@ function renderProjectsGrid(projects) {
 	grid.innerHTML = projects
 		.map(
 			(p) => `
-			<article class="rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-				${p.image ? `<img class="w-full h-40 object-cover" src="${encodeURI(p.image)}" alt="${escapeHtml(p.title || 'Project image')}" />` : ''}
-				<div class="p-4">
-					<h3 class="font-semibold">${escapeHtml(p.title || '')}</h3>
-					<p class="mt-1 text-sm text-slate-600 dark:text-slate-300">${escapeHtml(p.description || '')}</p>
-					<div class="mt-2 flex gap-2 flex-wrap">
-						${(p.tags || []).map((t) => `<span class="text-xs px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">${escapeHtml(t)}</span>`).join('')}
+			<article class="w-full mb-8 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden transition-all hover:shadow-lg dark:hover:shadow-slate-800/50">
+				<div class="md:flex">
+					${p.image ? `
+					<div class="md:w-1/2 lg:w-2/3">
+						<img class="w-full h-64 md:h-auto object-cover" src="${encodeURI(p.image)}" alt="${escapeHtml(p.title || 'Project image')}" />
 					</div>
-					<div class="mt-3 flex gap-3">
-						${p.link ? `<a class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline" href="${encodeURI(p.link)}" target="_blank" rel="noopener">Live</a>` : ''}
-						${p.repo ? `<a class="text-sm text-indigo-600 dark:text-indigo-400 hover:underline" href="${encodeURI(p.repo)}" target="_blank" rel="noopener">Code</a>` : ''}
+					` : ''}
+					<div class="p-6 md:w-1/2 lg:w-1/3">
+						<div class="flex flex-col h-full">
+							<div class="mb-4">
+								<h3 class="text-xl font-bold">${escapeHtml(p.title || '')}</h3>
+								${p.subtitle ? `<p class="text-indigo-600 dark:text-indigo-400 font-medium">${escapeHtml(p.subtitle)}</p>` : ''}
+								${p.date || p.location ? `
+								<div class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+									${p.date ? `<span>${escapeHtml(p.date)}</span>` : ''}
+									${p.date && p.location ? ' • ' : ''}
+									${p.location ? `<span>${escapeHtml(p.location)}</span>` : ''}
+								</div>
+								` : ''}
+							</div>
+							
+							<div class="flex-grow">
+								<p class="text-slate-600 dark:text-slate-300 mb-4">${escapeHtml(p.description || '').replace(/\n/g, '<br>')}</p>
+							</div>
+
+							<div class="mt-4">
+								<div class="flex flex-wrap gap-2 mb-4">
+									${(p.tags || []).map((t) => `
+										<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-100">
+										${escapeHtml(t)}
+									</span>
+								`).join('')}
+								</div>
+
+								<div class="flex gap-3 pt-2 border-t border-slate-100 dark:border-slate-700">
+									${p.link ? `
+									<a class="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" 
+									   href="${encodeURI(p.link)}" target="_blank" rel="noopener">
+										<svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+										</svg>
+										View Project
+									</a>` : ''}
+
+									${p.repo ? `
+									<a class="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" 
+									   href="${encodeURI(p.repo)}" target="_blank" rel="noopener">
+										<svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+										</svg>
+										View Code
+									</a>` : ''}
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</article>`
