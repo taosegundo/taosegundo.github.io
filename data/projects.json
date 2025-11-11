@@ -1,3 +1,15 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "Private Pilot License (PPL) Training",
+    "subtitle": "ISAE-SUPAERO Air Operations Centre",
+    "date": "Sep 2024 - Present",
+    "location": "Toulouse, France",
+    "description": "Flying has always been one of my biggest motivations for studying aerospace engineering. In 2024, I began my Private Pilot License (PPL) training at the ISAE-SUPAERO Air Operations Centre, a selective program that offers students the chance to gain real flight experience while studying.\n\nThrough this formation, I'm learning not only to fly an aircraft but also to understand it from an operational point of view — how every system interacts, how decisions are made in dynamic environments, and how teamwork and communication become essential in the cockpit.\n\nThis experience has changed the way I see engineering: it connects the theory of systems and avionics I study in class with the tangible feeling of flight. Every lesson in the air reinforces my passion for aerospace and my wish to design systems that pilots can trust and enjoy flying.",
+    "image": "assets/img/PPL.jpeg",
+    "tags": ["Aviation", "Flight Training", "Aerospace"],
+    "featured": true
+  }
+]
 
 
