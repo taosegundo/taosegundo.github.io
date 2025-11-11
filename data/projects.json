@@ -7,7 +7,7 @@
     "location": "Toulouse, France",
     "description": "Flying has always been one of my biggest motivations for studying aerospace engineering. In 2024, I began my Private Pilot License (PPL) training at the ISAE-SUPAERO Air Operations Centre, a selective program that offers students the chance to gain real flight experience while studying.\n\nThrough this formation, I'm learning not only to fly an aircraft but also to understand it from an operational point of view — how every system interacts, how decisions are made in dynamic environments, and how teamwork and communication become essential in the cockpit.\n\nThis experience has changed the way I see engineering: it connects the theory of systems and avionics I study in class with the tangible feeling of flight. Every lesson in the air reinforces my passion for aerospace and my wish to design systems that pilots can trust and enjoy flying.",
     "image": "assets/img/PPL.jpeg",
-    "tags": ["Aviation", "Flight Training", "Aerospace"],
+    "tags": ["Aviation", "Flight Training", "Aircraft Operations"],
     "featured": true
   },
   {
@@ -55,7 +55,18 @@
         "thumbnail": "assets/img/Sparrow1.jpeg"
       }
     ],
-    "tags": ["Aerospace Engineering", "3D Printing", "CAD Design", "Avionics", "Project Management"],
+    "tags": ["3D Printing", "CAD Design", "Avionics", "Project Management"],
+    "featured": true
+  },
+  {
+    "id": 3,
+    "title": "FPV Drone Build",
+    "subtitle": "Personal Project",
+    "date": "2025 - Ongoing",
+    "location": "Toulouse, France",
+    "description": "I am currently building a 5-inch FPV drone entirely from individual components — a project I started as a personal challenge to deepen my understanding of electronics assembly, systems integration, and the satisfaction of creating something that truly flies.\n\nThe drone is built around a MANTA 5 SE carbon fiber frame, a SpeedyBee F405 V4 flight controller, and a SpeedyBee 55A ESC, powered by 6S LiPo batteries. I'm progressively acquiring the remaining components, testing configurations, and training daily on a simulator using my ELRS RadioMaster controller to improve my flying precision and reflexes.\n\nBeyond assembly, I'm using this project as a platform to explore embedded software and autonomy. After completing the DeepLearning.AI certification in Supervised Machine Learning (Python, NumPy, scikit-learn), I started learning OpenCV, with the goal of implementing a real-time path-following algorithm on a Raspberry Pi 3 mounted onboard the drone.\n\nThis project brings together what I enjoy most — building and experimenting — and helps me grow as both an engineer and a pilot by combining control, and real-world testing in a single system.",
+    "image": "assets/img/fpv.png",
+    "tags": ["Electronics", "Embedded Systems", "FPV Drones", "Computer Vision", "Machine Learning"],
     "featured": true
   }
 ]
