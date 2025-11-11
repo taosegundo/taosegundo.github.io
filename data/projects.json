@@ -20,6 +20,11 @@
     "media": [
       {
         "type": "image",
+        "src": "assets/img/Sparrow3.jpeg",
+        "alt": "Sparrow Rocket - Internal Components"
+      },
+      {
+        "type": "image",
         "src": "assets/img/Sparrow1.jpeg",
         "alt": "Sparrow Rocket - Final Assembly"
       },
@@ -30,8 +35,18 @@
       },
       {
         "type": "image",
-        "src": "assets/img/Sparrow3.jpeg",
-        "alt": "Sparrow Rocket - Internal Components"
+        "src": "assets/img/Sparrow4.jpg",
+        "alt": "Sparrow Rocket - Assembly Process"
+      },
+      {
+        "type": "image",
+        "src": "assets/img/Sparrow5.jpg",
+        "alt": "Sparrow Rocket - Team Work"
+      },
+      {
+        "type": "image",
+        "src": "assets/img/Sparrow6.jpg",
+        "alt": "Sparrow Rocket - Final Design"
       },
       {
         "type": "video",
