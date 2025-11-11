@@ -9,6 +9,39 @@
     "image": "assets/img/PPL.jpeg",
     "tags": ["Aviation", "Flight Training", "Aerospace"],
     "featured": true
+  },
+  {
+    "id": 2,
+    "title": "Sparrow Rocket Project",
+    "subtitle": "SUPAERO Space Section x CNES",
+    "date": "Sep 2024 - Feb 2025",
+    "location": "Toulouse, France",
+    "description": "I joined the Sparrow project, a student-led initiative within the ISAE-SUPAERO Space Section, carried out in collaboration with CNES as part of a guided rocketry program. Our goal was to design and build a fully functional model rocket, from concept to launch.\n\nThe rocket structure combined a PVC tube fuselage, 3D-printed fairing and internal components, and laser-cut ailerons, all adapted to its weight, length, and mass distribution for improved flight stability. The avionics system was based on a Raspberry Pi Pico controller with a Raspberry Rocket module, powered by a compact battery and servo mechanism to deploy the parachute mid-flight.\n\nMy main contributions focused on the design and manufacturing of 3D-printed components in CATIA, assisting with the flight control code, and participating in the final assembly and system integration.\n\nThis project gave me a tangible sense of how mechanical, electronic, and software aspects merge into a working system — and the satisfaction of seeing something we designed actually take off. However, as you can see in the photos, the landing was not really smooth...",
+    "media": [
+      {
+        "type": "image",
+        "src": "assets/img/Sparrow1.jpeg",
+        "alt": "Sparrow Rocket - Final Assembly"
+      },
+      {
+        "type": "image",
+        "src": "assets/img/Sparrow2.jpeg",
+        "alt": "Sparrow Rocket - Launch Preparation"
+      },
+      {
+        "type": "image",
+        "src": "assets/img/Sparrow3.jpeg",
+        "alt": "Sparrow Rocket - Internal Components"
+      },
+      {
+        "type": "video",
+        "src": "assets/img/Sparrow7.mp4",
+        "alt": "Sparrow Rocket - Launch Video",
+        "thumbnail": "assets/img/Sparrow1.jpeg"
+      }
+    ],
+    "tags": ["Aerospace Engineering", "3D Printing", "CAD Design", "Avionics", "Project Management"],
+    "featured": true
   }
 ]
 

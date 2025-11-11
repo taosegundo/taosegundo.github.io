@@ -67,21 +67,27 @@ p, li, a, button, .btn-primary, .btn-secondary, .nav-link {
 
 /* Project image container */
 .w-full.lg\:w-1\/3.bg-slate-50.dark\:bg-slate-800 {
-  padding: 1.5rem;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 300px;
+  min-height: 350px;
   max-height: 500px;
+  overflow: hidden;
 }
 
 /* Project image */
 .w-full.h-auto.max-h-full.object-contain {
-  max-height: 100%;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
   object-position: center;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for better user experience */
+.w-full.h-auto.max-h-full.object-contain:hover {
+  transform: scale(1.02);
 }
 
 /* Dark mode overrides */

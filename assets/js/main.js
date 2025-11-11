@@ -58,77 +58,198 @@ function renderFeatured(projects) {
 function renderProjectsGrid(projects) {
 	const grid = document.getElementById('projectsGrid');
 	if (!grid || !Array.isArray(projects)) return;
+
 	grid.innerHTML = projects
-		.map(
-			(p) => `
-			<article class="w-full mb-12">
-				<div class="w-full max-w-[2000px] mx-auto rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden transition-all hover:shadow-lg dark:hover:shadow-slate-800/50">
-					<div class="flex flex-col lg:flex-row bg-white dark:bg-slate-900">
-					${p.image ? `
-					<div class="w-full lg:w-1/3 bg-slate-50 dark:bg-slate-800 p-6 flex items-center justify-center">
-						<div class="w-full h-full max-h-[400px] flex items-center">
-							<img class="w-full h-auto max-h-full object-contain" src="${encodeURI(p.image)}" alt="${escapeHtml(p.title || 'Project image')}" />
+		.map((p) => {
+			// Check if project has media array or fallback to single image
+			const hasMedia = Array.isArray(p.media) && p.media.length > 0;
+			const mediaItems = hasMedia ? p.media : (p.image ? [{ type: 'image', src: p.image, alt: p.title || 'Project image' }] : []);
+
+			// Generate media HTML
+			let mediaHtml = '';
+			if (mediaItems.length > 0) {
+				mediaHtml = `
+				<div class="w-full lg:w-1/3 bg-slate-50 dark:bg-slate-800 relative group">
+					<div class="carousel-container relative w-full h-full min-h-[300px] max-h-[500px] overflow-hidden">
+						${mediaItems.map((item, index) => `
+						<div class="carousel-item absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-300 ${index === 0 ? 'opacity-100' : 'opacity-0'}" data-index="${index}">
+							${item.type === 'video' ? `
+							<video class="w-full h-full object-contain" controls poster="${item.thumbnail || ''}">
+								<source src="${item.src}" type="video/mp4">
+								Your browser does not support the video tag.
+							</video>
+							` : `
+							<img class="w-full h-full object-contain" src="${item.src}" alt="${escapeHtml(item.alt || '')}" />
+							`}
 						</div>
+						`).join('')}
 					</div>
-					` : ''}
-					<div class="w-full lg:w-2/3 p-8 lg:p-10">
-							<div class="flex flex-col h-full">
-								<div class="mb-6">
-									<h2 class="text-2xl font-bold text-slate-800 dark:text-white">${escapeHtml(p.title || '')}</h2>
-									${p.subtitle ? `<p class="text-indigo-600 dark:text-indigo-400 font-medium mt-1">${escapeHtml(p.subtitle)}</p>` : ''}
-									${p.date || p.location ? `
-									<div class="mt-3 text-sm text-slate-500 dark:text-slate-400">
-										${p.date ? `<span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-									</svg>${escapeHtml(p.date)}</span>` : ''}
-										${p.date && p.location ? '<span class="mx-2">•</span>' : ''}
-										${p.location ? `<span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-									</svg>${escapeHtml(p.location)}</span>` : ''}
-									</div>
-									` : ''}
-								</div>
-								
-								<div class="flex-grow">
-									<p class="text-slate-600 dark:text-slate-300 leading-relaxed">${escapeHtml(p.description || '').replace(/\n/g, '<br>')}</p>
-								</div>
 
-								<div class="mt-6">
-									<div class="flex flex-wrap gap-2 mb-4">
-										${(p.tags || []).map((t) => `
-											<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-100">
-											${escapeHtml(t)}
-										</span>
-									`).join('')}
-									</div>
+					<!-- Navigation Arrows -->
+					${mediaItems.length > 1 ? `
+					<button class="carousel-nav absolute top-1/2 left-2 -translate-y-1/2 bg-black/50 text-white rounded-full w-10 h-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" data-direction="prev">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+						</svg>
+					</button>
+					<button class="carousel-nav absolute top-1/2 right-2 -translate-y-1/2 bg-black/50 text-white rounded-full w-10 h-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" data-direction="next">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+						</svg>
+					</button>
 
-									<div class="flex gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-										${p.link ? `
-										<a class="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" 
-										   href="${encodeURI(p.link)}" target="_blank" rel="noopener">
-											<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-											</svg>
-											View Project
-										</a>` : ''}
-
-										${p.repo ? `
-										<a class="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" 
-										   href="${encodeURI(p.repo)}" target="_blank" rel="noopener">
-											<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-											</svg>
-											View Code
-										</a>` : ''}
-									</div>
-							</div>
-						</div>
+					<!-- Dots Navigation -->
+					<div class="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
+						${mediaItems.map((_, index) => `
+							<button class="carousel-dot w-2 h-2 rounded-full bg-white/50 ${index === 0 ? 'bg-white' : ''}" data-index="${index}" aria-label="Go to slide ${index + 1}"></button>
+						`).join('')}
 					</div>
+				` : ''}
+			</div>
+			<div class="p-6 flex flex-col h-full">
+				<div class="flex-grow">
+					<h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">${escapeHtml(p.title || '')}</h3>
+					<p class="text-slate-600 dark:text-slate-300 mb-4">${escapeHtml(p.description || '')}</p>
 				</div>
-			</article>`
-		)
+
+				<div class="flex flex-wrap gap-2 mb-4">
+					${(p.tags || []).map((t) => `
+						<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-100">
+						${escapeHtml(t)}
+					</span>
+					`).join('')}
+				</div>
+
+				<div class="flex gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+					${p.link ? `
+					<a class="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" 
+					   href="${encodeURI(p.link)}" target="_blank" rel="noopener">
+						<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+						</svg>
+						View Project
+					</a>` : ''}
+
+					${p.repo ? `
+					<a class="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:underline" 
+					   href="${encodeURI(p.repo)}" target="_blank" rel="noopener">
+						<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+						</svg>
+						View Code
+					</a>` : ''}
+				</div>
+			</div>
+		`;
+			}
+
+			// Return the complete project card
+			return `
+			<article class="w-full mb-12 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden transition-all hover:shadow-lg dark:hover:shadow-slate-800/50 bg-white dark:bg-slate-900">
+				<div class="flex flex-col lg:flex-row">
+					${mediaHtml}
+				</div>
+			</article>
+			`;
+		})
 		.join('');
+
+	// Initialize carousels after DOM is updated
+	setTimeout(() => {
+		document.querySelectorAll('.carousel-container').forEach(container => {
+			const items = container.querySelectorAll('.carousel-item');
+			if (items.length <= 1) return; // No need for carousel if only one item
+
+			const dots = container.parentElement.querySelectorAll('.carousel-dot');
+			const prevBtn = container.parentElement.querySelector('[data-direction="prev"]');
+			const nextBtn = container.parentElement.querySelector('[data-direction="next"]');
+
+			let currentIndex = 0;
+
+			const showSlide = (index) => {
+				// Handle out of bounds
+				if (index < 0) index = items.length - 1;
+				if (index >= items.length) index = 0;
+
+				// Hide all items
+				items.forEach(item => {
+					item.classList.remove('opacity-100');
+					item.classList.add('opacity-0');
+				});
+				
+				// Show current item
+				items[index].classList.remove('opacity-0');
+				items[index].classList.add('opacity-100');
+
+				// Update dots
+				if (dots.length > 0) {
+					dots.forEach(dot => {
+						dot.classList.remove('bg-white');
+						dot.classList.add('bg-white/50');
+					});
+					if (dots[index]) {
+						dots[index].classList.remove('bg-white/50');
+						dots[index].classList.add('bg-white');
+					}
+				}
+
+				currentIndex = index;
+			};
+
+			// Navigation with dots
+			dots.forEach((dot, index) => {
+				dot.addEventListener('click', () => showSlide(index));
+			});
+
+			// Previous button
+			if (prevBtn) {
+				prevBtn.addEventListener('click', () => {
+					showSlide(currentIndex - 1);
+				});
+			}
+
+			// Next button
+			if (nextBtn) {
+				nextBtn.addEventListener('click', () => {
+					showSlide(currentIndex + 1);
+				});
+			}
+
+			// Keyboard navigation
+			container.addEventListener('keydown', (e) => {
+				if (e.key === 'ArrowLeft') {
+					showSlide(currentIndex - 1);
+					e.preventDefault();
+				} else if (e.key === 'ArrowRight') {
+					showSlide(currentIndex + 1);
+					e.preventDefault();
+				}
+			});
+
+			// Auto-advance slides (only if more than one slide)
+			if (items.length > 1) {
+				let slideInterval = setInterval(() => {
+					if (!container.matches(':hover')) {
+						showSlide((currentIndex + 1) % items.length);
+					}
+				}, 5000);
+
+				// Pause auto-advance on hover
+				container.addEventListener('mouseenter', () => {
+					clearInterval(slideInterval);
+				});
+
+				container.addEventListener('mouseleave', () => {
+					slideInterval = setInterval(() => {
+						showSlide((currentIndex + 1) % items.length);
+					}, 5000);
+				});
+			}
+
+			// Make carousel focusable
+			container.setAttribute('tabindex', '0');
+		});
+	}, 0);
 }
 
 function renderTags(projects) {
